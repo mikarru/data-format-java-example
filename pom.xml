@@ -35,6 +35,11 @@
       <artifactId>protobuf-java</artifactId>
       <version>3.9.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+      <version>1.9.1</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -77,6 +82,7 @@
               <goal>run</goal>
             </goals>
             <configuration>
+              <stringType>String</stringType>
               <inputDirectories>
                 <include>src/main/protobuf</include>
               </inputDirectories>
@@ -86,6 +92,24 @@
                   <outputDirectory>src/main/java</outputDirectory>
                 </outputTarget>
               </outputTargets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.avro</groupId>
+        <artifactId>avro-maven-plugin</artifactId>
+        <version>1.9.1</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>schema</goal>
+            </goals>
+            <configuration>
+              <stringType>String</stringType>
+              <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+              <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
             </configuration>
           </execution>
         </executions>

@@ -1,0 +1,23 @@
+{
+  "namespace": "com.example.mikarru.data.format.avro.generated",
+  "type": "record",
+  "name": "User",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    },
+    {
+      "name": "links",
+      "type": {"type": "array", "items": "string"}
+    }
+  ]
+}
