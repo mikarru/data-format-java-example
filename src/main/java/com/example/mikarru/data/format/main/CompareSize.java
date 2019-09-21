@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.example.mikarru.data.format.User;
 import com.example.mikarru.data.format.UserCodec;
 import com.example.mikarru.data.format.avro.AvroUserCodec;
+import com.example.mikarru.data.format.avro.AvroUserCodec2;
 import com.example.mikarru.data.format.json.JsonUserCodec;
 import com.example.mikarru.data.format.protobuf.ProtobufUserCodec;
 
@@ -19,10 +20,12 @@ public class CompareSize {
             .build();
     public static void main(String[] args) throws IOException {
         AvroUserCodec avroCodec = new AvroUserCodec();
+        AvroUserCodec2 avroCodec2 = new AvroUserCodec2();
         JsonUserCodec jsonCodec = new JsonUserCodec();
         ProtobufUserCodec protobufCodec = new ProtobufUserCodec();
 
         showSize(avroCodec, USER);
+        showSize(avroCodec2, USER);
         showSize(jsonCodec, USER);
         showSize(protobufCodec, USER);
     }

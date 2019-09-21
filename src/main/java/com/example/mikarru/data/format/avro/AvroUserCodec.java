@@ -26,6 +26,16 @@ public class AvroUserCodec implements UserCodec {
                 .build();
     }
 
+    static User convertFromAvroUser(com.example.mikarru.data.format.avro.generated.User avroUser) {
+        return User
+                .builder()
+                .id(avroUser.getId())
+                .name(avroUser.getName())
+                .age(avroUser.getAge())
+                .links(avroUser.getLinks())
+                .build();
+    }
+
     @Override
     public byte[] serialize(User user) throws IOException {
         return convertToAvroUser(user).toByteBuffer().array();
@@ -36,13 +46,7 @@ public class AvroUserCodec implements UserCodec {
         ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
         com.example.mikarru.data.format.avro.generated.User avroUser =
                 com.example.mikarru.data.format.avro.generated.User.fromByteBuffer(byteBuffer);
-        return User
-                .builder()
-                .id(avroUser.getId())
-                .name(avroUser.getName())
-                .age(avroUser.getAge())
-                .links(avroUser.getLinks())
-                .build();
+        return convertFromAvroUser(avroUser);
     }
 
     public static class AvroUserWriter implements UserWriter {
@@ -89,11 +93,11 @@ public class AvroUserCodec implements UserCodec {
 
         @Override
         public void read(User user) throws IOException {
-            com.example.mikarru.data.format.avro.generated.User avroUser = reader.next(reusableAvroUser);
-            user.setId(avroUser.getId());
-            user.setName(avroUser.getName());
-            user.setAge(avroUser.getAge());
-            user.setLinks(avroUser.getLinks());
+            reusableAvroUser = reader.next(reusableAvroUser);
+            user.setId(reusableAvroUser.getId());
+            user.setName(reusableAvroUser.getName());
+            user.setAge(reusableAvroUser.getAge());
+            user.setLinks(reusableAvroUser.getLinks());
         }
 
         @Override
