@@ -1,3 +1,6 @@
 /.idea
 /target
 *.iml
+
+# protobuf
+/src/main/java/com/example/mikarru/data/format/protobuf/generated/
