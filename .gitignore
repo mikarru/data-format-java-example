@@ -4,3 +4,6 @@
 
 # protobuf
 /src/main/java/com/example/mikarru/data/format/protobuf/generated/
+
+# avro
+/src/main/java/com/example/mikarru/data/format/avro/generated/
