@@ -6,12 +6,13 @@ import java.io.OutputStream;
 
 public interface UserCodec {
     interface UserWriter {
-        int write(User user) throws IOException;
+        void write(User user) throws IOException;
         void close() throws IOException;
     }
 
     interface UserReader {
-        int read(User user) throws IOException;
+        void read(User user) throws IOException;
+        boolean hasNext() throws IOException;
         void close() throws IOException;
     }
 
